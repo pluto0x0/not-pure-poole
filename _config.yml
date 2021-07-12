@@ -1,11 +1,11 @@
 # Setup
-title: Not Pure Poole
-description: A simple, beautiful, and powerful Jekyll theme for blogs
-url: https://vszhub.github.io
-avatar: /avatar.jpeg
+title: the goddamn blog.
+description: nothing here.
+url: https://pluto0x0.github.io
+avatar: https://i.loli.net/2021/07/12/6kp2ZA9fJPS8vcg.jpg
 paginate: 5
 permalink: pretty
-cover_image: /bg.jpeg
+cover_image: https://i.loli.net/2021/07/12/qxG4I6eUNcp2DPm.jpg
 
 # Gems
 plugins:
@@ -29,16 +29,16 @@ exclude:
 
 # Optimize Jekyl SEO Tag
 twitter:
-  username: vszhub
+  username: pluto0x0
   card: summary
-logo: logo.png
+logo: https://i.loli.net/2021/07/12/6kp2ZA9fJPS8vcg.jpg
 social:
-  name: Songzi Vong
+  name: yzf
   links:
-    - https://twitter.com/vszhub
-    - https://github.com/vszhub
+    - https://twitter.com/pluto0x0
+    - https://github.com/pluto0x0
 google_site_verification: xxxxx
-lang: zh
+lang: en
 
 sass:
   sass_dir: _sass
@@ -54,6 +54,6 @@ sass:
 
 # Specify the author for blog posts
 author:
-  name: Songzi Vong
-  url: https://github.com/vszhub/
-  email: vszhub@gmail.com
+  name: yzf
+  url: https://github.com/pluto0x0/
+  email: ying.zf@foxmail.com
