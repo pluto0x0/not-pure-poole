@@ -61,8 +61,8 @@ math: true
 >
 >如果 $$j=i-1$$ ，则 $$n \ge Fib_i + Fib_j = Fib_{i+1}$$ ，与 $$n < Fib_{i+1}$$ 矛盾。故 $$Fib_j 与 Fib_i$$ 不连续。
 
-因为 $$Fib_{i+1}>Fib_{i}$$ ，因此有 $$Fib_{i+2}>2Fib_{i}$$ 。
+引理：因为 $$Fib_{i+1}>Fib_{i}$$ ，因此有 $$Fib_{i+2}>2Fib_{i}$$ 。
 
-令 $$n = Fib_a + Fib_b + Fibc +\cdots \; (a < b-1,\,b < c-1, \cdots)$$ 策略：先手先取走 $$Fib_a$$ 数量的物品，因为 $$Fib_b>2Fib_a$$ ，后手此时能选择的物品数量一定小于 $$Fib_b$$ ，通过前文“ $$n$$ 为斐波那契数”时的策略可知，在这 $$Fib_b$$ 个物品中，整体游戏的先手（也就是对于这 $$Fib_b$$ 个物品的子游戏中的后手）一定能取到最后一个，可知对于 $$Fib_b,Fib_c,\cdots$$ ，先手同样能取到最后一个。
+令 $$n = Fib_a + Fib_b + Fib_c +\cdots \; (a < b-1,\,b < c-1, \cdots)$$ 策略：先手先取走 $$Fib_a$$ 数量的物品，因为 $$Fib_b>2Fib_a$$ （引理），后手此时能选择的物品数量一定小于 $$Fib_b$$ ，通过前文“ $$n$$ 为斐波那契数”时的策略可知，在这 $$Fib_b$$ 个物品中，整体游戏的先手（也就是对于这 $$Fib_b$$ 个物品的子游戏中的后手）一定能取到最后一个，可知对于 $$Fib_b,Fib_c,\cdots$$ ，先手同样能取到最后一个。
 
 [^qkdf]: <https://zh.wikipedia.org/wiki/%E9%BD%8A%E8%82%AF%E5%A4%9A%E5%A4%AB%E5%AE%9A%E7%90%86>
