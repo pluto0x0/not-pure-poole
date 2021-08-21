@@ -1,68 +1,124 @@
 ---
-title: 博弈论基础模型
+title: 博弈例题练习
 tags: [博弈论]
 categories: 数学
 toc:  true
 math: true
 ---
 
-# Bash Game
+## luogu P5765
 
-一堆物品有 $$n$$ 个，两个人轮流从这堆物品中取物，规定每次至少取一个，最多取 $$m$$ 个。最后取光者得胜。
+### Problem
 
-## 结论
+[题目](https://www.luogu.com.cn/problem/P5675)
 
-先手必败，当且仅当 $$(m+1)\vert n$$ 。
+ $$n$$ 堆石头，从中选择若干堆，进行Nim游戏，并规定先手取的第一堆。问先手必败的方案数量。
 
-## 证明
+### Solution
 
-必要性：
+枚举第一步取第 $$k$$ 堆，对于剩下的 $$n-1$$ 堆dp， $$f_{i}$$ 表示这 $$n-1$$ 堆中异或和为 $$i$$ 的方案数。
 
- $$(m+1)\vert n$$ 时，先手取 $$x$$ 个，后手就取 $$m+1-x$$ 个，后手取完最后一个。
+这部分的答案为 $$\sum\limits_{i \ge a_k}f_i$$ 
 
-充分性：
+### Code
 
-否则，先手取 $$n\mod (m+1)$$ 个，后手为必败状态。
+```cpp
+#include <bits/stdc++.h>
+#define rep(i, a, b) for (int i = (a); i <= (b); i++)
+#define per(i, a, b) for (int i = (a); i >= (b); i--)
+#define D(x) cout << #x << " : " << x << endl
+using namespace std;
+typedef long long ll;
+const ll mod = 1e9 + 7;
+const int N = 211;
+ll f[2][256];
 
-# Wythoff Game
+int n;
+ll a[N];
 
-威佐夫游戏是一个尼姆游戏（双人数学博弈游戏），规则是两人轮流取两堆筹码，其中取法有两种：取走一堆中任意个筹码，或从两堆中取走相同数目的筹码。取完所有筹码的一方获胜。
+int main() {
+    cin.tie(0);
+    ios::sync_with_stdio(false);
 
-## 结论
+    cin >> n;
+    rep(i, 1, n) cin >> a[i];
 
-两堆数量为 $$a,b\;(a<b)$$ ，则先手必败，当且仅当：
+    ll ans = 0;
+    bool op = 0;
+    rep(i, 1, n) {
+        memset(f[op], 0, sizeof f[op]);
+        f[op][0] = 1;
+        rep(j, 1, n) {
+            if (j == i) continue;
+            op = !op;
+            memset(f[op], 0, sizeof f[op]);
+            rep(k, 0, 255) {
+                (f[op][k] += f[!op][k]) %= mod;
+                (f[op][k ^ a[j]] += f[!op][k]) %= mod;
+            }
+        }
+        rep(j, a[i], 255) (ans += f[op][j]) %= mod;
+    }
+    cout << ans << endl;
+    return 0;
+}
+```
 
- $$a=\left\lfloor \frac{\sqrt{5}-1}{2} \right\rfloor (b-a)$$ 
+## luogu P2148
 
-# Fibonacci Game
+### Problem
 
-有一堆 $$n$$ 个石子，两个人轮流取，先手不能取完，之后每人每次至少取一颗，至多取另一个人上次所取石子数的2倍，取完所有石子者胜。
+[problem](https://www.luogu.com.cn/problem/P2148)
 
-## 结论
+### Solution
 
-先手必败，当且仅当 $$n$$ 为斐波那契数
+一个状态（两堆石头）用 $$(x,y)$$ 表示
 
-## 证明
+ $$sg(x,y) = f((x-1)\vert (y-1))$$ 
 
-必要性：
+其中 $$\vert$$ 表示按位或运算， $$f(x)$$ 表示 $$x$$ 的二进制表示下 $$0$$ 出现的最小位置（从位置0开始）。
 
-设 $$n=Fib_k=Fib_{k-1}+Fib_{k-2}$$ ，上一步取 $$m$$ 个。
-因为有 $$Fib_{k-1} < Fib{k-2}$$ ，若 $$k \ge Fib_{k-2}$$ ，取 $$n - m$$ 个即获胜。
+证明：打表。。。[题解](https://www.luogu.com.cn/blog/Sooke/solution-p2148)
 
-若 $$m < Fib_{k-2}$$ ，取 $$Fib_{k-2} - m$$ 个，仍然得到一个斐波那契数。
+### Code
 
-证明充分性需要用到齐肯多夫定理[^qkdf]：
+```cpp
+#include <bits/stdc++.h>
+#define rep(i, a, b) for (int i = (a); i <= (b); i++)
+#define per(i, a, b) for (int i = (a); i >= (b); i--)
+#define D(x) cout << #x << " : " << x << endl
+using namespace std;
+const int N = 20011;
 
->齐肯多夫定理表示任何正整数都可以表示成若干个**不连续**的斐波那契数之和。
->
->证明：
->
->设 $$Fib_i \le n < Fib_{i+1}\,,\,Fib_j \le n - Fib_i < Fib_{j+1}$$ 
->
->如果 $$j=i-1$$ ，则 $$n \ge Fib_i + Fib_j = Fib_{i+1}$$ ，与 $$n < Fib_{i+1}$$ 矛盾。故 $$Fib_j 与 Fib_i$$ 不连续。
+int T;
+int n, a[N];
 
-引理：因为 $$Fib_{i+1}>Fib_{i}$$ ，因此有 $$Fib_{i+2}>2Fib_{i}$$ 。
+int f(int x) {
+    int ans = 0;
+    while (x % 2) {
+        ans++;
+        x /= 2;
+    }
+    return ans;
+}
 
-令 $$n = Fib_a + Fib_b + Fib_c +\cdots \; (a < b-1,\,b < c-1, \cdots)$$ 策略：先手先取走 $$Fib_a$$ 数量的物品，因为 $$Fib_b>2Fib_a$$ （引理），后手此时能选择的物品数量一定小于 $$Fib_b$$ ，通过前文“ $$n$$ 为斐波那契数”时的策略可知，在这 $$Fib_b$$ 个物品中，整体游戏的先手（也就是对于这 $$Fib_b$$ 个物品的子游戏中的后手）一定能取到最后一个，可知对于 $$Fib_b,Fib_c,\cdots$$ ，先手同样能取到最后一个。
+int main() {
+    cin.tie(0);
+    ios::sync_with_stdio(false);
 
-[^qkdf]: <https://zh.wikipedia.org/wiki/%E9%BD%8A%E8%82%AF%E5%A4%9A%E5%A4%AB%E5%AE%9A%E7%90%86>
+    cin >> T;
+    while (T--) {
+        int ans = 0;
+        cin >> n;
+        rep(i, 1, n / 2) {
+            int x, y;
+            cin >> x >> y;
+            ans ^= f((x - 1) | (y - 1));
+        }
+        cout << (ans ? "YES" : "NO") << endl;
+    }
+    return 0;
+}
+```
+
+
