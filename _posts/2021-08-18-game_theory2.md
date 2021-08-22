@@ -122,3 +122,101 @@ int main() {
 ```
 
 
+
+## luogu P2964
+
+### Problem
+
+[problem](https://www.luogu.com.cn/problem/P2964)
+
+### Solution
+
+dp。 $$f(i,j)$$ 表示先手从第 $$i$$ 个开始取 $$j$$ 个，直到游戏结束时先手能获得的最大分数。
+
+令
+
+ $$s(i) = \sum_i^n a(i)$$ 
+
+则
+
+ $$f(i,j) = s(i) - \max\limits_{k=1}^{\min\left(n-(i+j)+1, j\times 2\right)}f(i + j,k)$$ 
+
+答案为 $$\max(f(1,1), f(1,2))$$ 
+
+#### n^2优化
+
+令 $$f'(i,j) = \min\limits_{k=1}^j f(i,k)$$ 
+
+ $$f'(i,j) = s(i) - f'\left(i + j,\min\left(n-(i+j)+1, j\times 2\right)\right)$$ 
+
+答案为 $$f(1,2)$$ 
+
+### Code
+
+n^3
+
+```cpp
+#include <bits/stdc++.h>
+#define rep(i, a, b) for (int i = (a); i <= (b); i++)
+#define per(i, a, b) for (int i = (a); i >= (b); i--)
+#define D(x) cout << #x << " : " << x << endl
+using namespace std;
+const int N = 2011;
+
+int n;
+int a[N], f[N][N], s[N];
+
+int main() {
+    cin.tie(0);
+    ios::sync_with_stdio(false);
+
+    memset(f, 0, sizeof f);
+    cin >> n;
+    rep(i, 1, n) cin >> a[i];
+    s[n + 1] = 0;
+    per(i, n, 1) {
+        s[i] = s[i + 1] + a[i];
+        f[i][n - i + 1] = s[i];
+        rep(l, 1, n - i) {
+            int mx = min(l * 2, n - (i + l) + 1);
+            int nxt = 0;
+            rep(k, 1, mx) { nxt = max(nxt, f[i + l][k]); }
+            f[i][l] = s[i] - nxt;
+        }
+    }
+    int ans = max(f[1][1], f[1][2]);
+    cout << ans << endl;
+    return 0;
+}
+```
+n^2
+
+```cpp
+#include <bits/stdc++.h>
+#define rep(i, a, b) for (int i = (a); i <= (b); i++)
+#define per(i, a, b) for (int i = (a); i >= (b); i--)
+#define D(x) cout << #x << " : " << x << endl
+using namespace std;
+const int N = 2011;
+
+int n;
+int a[N], f[N][N];
+
+int main() {
+    cin.tie(0);
+    ios::sync_with_stdio(false);
+
+    memset(f, 0, sizeof f);
+    cin >> n;
+    rep(i, 1, n) cin >> a[i];
+    int s = 0;
+    per(i, n, 1) {
+        s += a[i];
+        rep(l, 1, n - i) 
+            f[i][l] = max(f[i][l - 1], s - f[i + l][min(l * 2, n - (i + l) + 1)]);
+        f[i][n - i + 1] = max(f[i][n - i], s);
+    }
+    cout << f[1][2] << endl;
+    return 0;
+}
+```
