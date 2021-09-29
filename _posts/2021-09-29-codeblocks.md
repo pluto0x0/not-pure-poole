@@ -23,13 +23,8 @@ codeblocks支持单文件编译运行，但是必须再project内才能使用deb
 ## 编译/运行
 
 ### 快捷键
-Function|Shortcut Key
----|---
-构建|Ctrl + F9
-编译当前文件|Ctrl + Shift + F9
-运行|Ctrl + F10
-构建并运行|F9
-重新构建|Ctrl + F11
+
+![image.png](https://i.loli.net/2021/09/29/O4beJQlg3NFs826.png)
 
 from <https://www.jianshu.com/p/4080e78fda4b>
 
@@ -43,17 +38,7 @@ from <https://www.jianshu.com/p/4080e78fda4b>
 
 ## 快捷键
 
-Function|Shortcut Key
----|---
-开始调试|F8
-继续调试|Ctrl + F7
-Step over a code block|F7
-Step into a code block|Shift + F7
-Step out of a code block|Ctrl + Shift + F7
-添加/取消断点|F5
-运行到下一个断点|F4
-上一个错误|Alt + F1
-下一个错误|Alt + F2
+![image.png](https://i.loli.net/2021/09/29/YiFxlsyR5VOdrIb.png)
 
 from <https://www.jianshu.com/p/4080e78fda4b>
 
