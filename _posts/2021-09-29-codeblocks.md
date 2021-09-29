@@ -67,7 +67,19 @@ from <https://www.jianshu.com/p/4080e78fda4b>
 
 将这个当前布局保存在View->Perspectives->GDB/CDB Debugger Default视图中，以后每次调试就会出现Watches窗口。
 
+同理，可以将显示编译信息的log窗口保存在default视图中。
+
 ![image.png](https://i.loli.net/2021/09/29/gV1RiNmsDEPQckx.png)
+
+### 其他
+
+gdb的max-value-size默认为65536，即超过次长度的数组都不能显示。
+
+解决方法：Settinggs->Debugger
+
+![image.png](https://i.loli.net/2021/09/29/aHu8IQnG3EU9BVf.png)
+
+相当于每次调试之前执行`gdb set max-value-size unlimited`来取消限制。
 
 ## 编辑器（settings->editor）
 
