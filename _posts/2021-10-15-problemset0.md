@@ -6,9 +6,7 @@ tags:
 - 数学
 categories: 杂
 ---
-
 记录最近的一些题目
-
 
 
 ## CF 1600E
