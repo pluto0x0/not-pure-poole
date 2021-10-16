@@ -5,7 +5,7 @@ tags: [构造, 数学]
 categories: solution
 ---
 
-记录最近的一些题目
+0记录最近的一些题目
 
 ## CF 1600E
 
