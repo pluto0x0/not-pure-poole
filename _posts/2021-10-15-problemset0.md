@@ -4,11 +4,8 @@ math: true
 tags:
 - 构造
 - 数学
-categories: 杂
+categories: solution
 ---
-
-## 问题引入
-求多项式乘法
 
 记录最近的一些题目
 
