@@ -1,9 +1,7 @@
 ---
 title: 一些题目
 math: true
-tags:
-- 构造
-- 数学
+tags: [构造, 数学]
 categories: solution
 ---
 
